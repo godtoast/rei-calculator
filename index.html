@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rei Level Calculator</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #1b1b1b;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #2a2a2a;
+    padding: 25px;
+    border-radius: 10px;
+    width: 320px;
+    text-align: center;
+}
+
+h2 {
+    color: #4fc3ff;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #4fc3ff;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #33a6dd;
+}
+
+#intBox {
+    display: none;
+}
+
+.result {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h2>Rei Level Calculator</h2>
+
+<input type="number" id="maxRei" placeholder="Max Rei">
+
+<label>
+    <input type="checkbox" id="hasInt" onchange="toggleInt()">
+    Has INT
+</label>
+
+<div id="intBox">
+    <input type="number" id="int" placeholder="INT" value="1">
+</div>
+
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result">
+Rei Level: -
+</div>
+
+</div>
+
+<script>
+function toggleInt() {
+    document.getElementById("intBox").style.display =
+        document.getElementById("hasInt").checked ? "block" : "none";
+}
+
+function calculate() {
+    let maxRei = Number(document.getElementById("maxRei").value);
+
+    if (!maxRei) {
+        alert("Enter Max Rei.");
+        return;
+    }
+
+    let level;
+
+    if (document.getElementById("hasInt").checked) {
+        let intValue = Number(document.getElementById("int").value) || 1;
+        level = ((maxRei - ((intValue - 1) * 10)) / 10) - 7.5;
+    } else {
+        level = (maxRei / 10) - 7.5;
+    }
+
+    document.getElementById("result").textContent =
+        "Rei Level: " + level.toFixed(1);
+}
+</script>
+
+</body>
+</html>
